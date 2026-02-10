@@ -1,0 +1,25 @@
+---
+description: Regras para chamadas de API, Repositories e Models
+globs: lib/data/**, lib/repositories/**, lib/models/**
+---
+
+# API & Backend Standards
+
+## Ferramentas Obrigatórias
+- **Cliente HTTP:** Dio (nunca use o pacote 'http' nativo).
+- **Serialização:** JSON Serializable ou @freezed para Models.
+- **Tratamento de Erros:** Blocos try-catch capturando `DioException`.
+
+## Estrutura de Chamadas
+- **Data Sources:** Devem ser classes responsáveis apenas pela requisição bruta.
+- **Repositories:** Devem converter a resposta da Data Source em objetos de domínio e tratar erros.
+- **Endpoints:** Use uma classe abstrata ou static const `ApiEndpoints` para gerenciar URLs.
+
+## Padrões de Código
+- Sempre utilize `Future<ResultType>` ou tipos `Either` para retornos.
+- Adicione logs de requisição apenas em modo Debug usando Interceptors.
+- Todo Model deve ter um método `factory Model.fromJson(Map<String, dynamic> json)`.
+
+## Exemplo de Assinatura de Método
+`Future<List<User>> getUsers();` -> Correto
+`Future<dynamic> getUsers();` -> Errado

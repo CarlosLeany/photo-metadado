@@ -1,0 +1,22 @@
+---
+description: Regras gerais de arquitetura Flutter e interface
+globs: lib/**
+---
+
+# Flutter General Rules
+
+## Arquitetura de Pastas
+- `lib/core`: Configurações globais, temas e instâncias de clientes API.
+- `lib/data`: DataSources e Models.
+- `lib/repositories`: Implementações de regras de negócio de dados.
+- `lib/presentation`: Widgets, Screens e Controllers/State Management.
+
+## Separação de Conceitos (SoC)
+- **NUNCA** faça chamadas de API dentro do método `build` de um Widget.
+- **NUNCA** use `print()`. Use `debugPrint()` ou um logger.
+- Widgets de UI devem ser `Stateless` sempre que possível, delegando o estado para um Provider/Bloc/Cubit.
+
+## Responsividade (Web, Android, iOS)
+- Sempre verifique o tamanho da tela usando `MediaQuery` ou `LayoutBuilder`.
+- Use `SafeArea` para evitar problemas com notches em iOS e Android.
+- Para a Web, priorize o carregamento condicional de assets pesados.
